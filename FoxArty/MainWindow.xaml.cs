@@ -29,6 +29,9 @@ namespace FoxArty
         private int Wdir = 0; // Default wind direction
         private int Wstr = 0; // Default wind strength
 
+        // Adjusted target position after wind
+        private Point adjustedTargetPosition = new Point(0, 0);
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,6 +54,18 @@ namespace FoxArty
                 {
                     DrawRangeCircleIfApplicable();
                 }
+
+                // Redraw gun to target line if both are placed
+                if (isTargetPlaced && GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+                {
+                    DrawGunToTargetLine();
+                }
+
+                // Redraw wind line if applicable
+                if (isTargetPlaced && GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+                {
+                    DrawWindLine();
+                }
             }
         }
 
@@ -65,6 +80,8 @@ namespace FoxArty
                 isPlacingGun = false;
 
                 DrawRangeCircleIfApplicable();
+                DrawGunToTargetLine(); // Draw line after placing gun
+                DrawWindLine(); // Draw wind line if target is already placed
                 UpdateAzimuthAndDistance();
             }
             else if (isPlacingTarget)
@@ -75,13 +92,13 @@ namespace FoxArty
                 isPlacingTarget = false;
 
                 // Draw the spread circle centered on the target
-                DrawTargetSpreadCircle(targetPosition, 20.8);
+                DrawTargetSpreadCircle(targetPosition, 8.2);
 
-                // Update azimuth and distance based on the new target position
+                DrawGunToTargetLine(); // Draw line after placing target
+                DrawWindLine(); // Draw wind line based on wind and target
                 UpdateAzimuthAndDistance();
             }
         }
-
 
         private void YellowDot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -134,6 +151,13 @@ namespace FoxArty
 
             // Update azimuth and distance based on new wind values
             UpdateAzimuthAndDistance();
+
+            // Redraw gun to target line if both are placed
+            if (isTargetPlaced && GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+            {
+                DrawGunToTargetLine();
+                DrawWindLine();
+            }
         }
 
         private void YellowDot_MouseLeftButtonUp(object sender, MouseEventArgs e)
@@ -150,7 +174,7 @@ namespace FoxArty
 
             // Get the position of the Yellow Dot
             double yellowDotX = Canvas.GetLeft(YellowDot) + (YellowDot.Width / 2);
-            double yellowDotY = Canvas.GetTop(YellowDot) + (YellowDot.Width / 2);
+            double yellowDotY = Canvas.GetTop(YellowDot) + (YellowDot.Height / 2);
 
             // Calculate the distance (radius) from the center
             double dx = yellowDotX - centerX;
@@ -208,6 +232,19 @@ namespace FoxArty
                     if (isGridVisible)
                     {
                         DrawGrid(largeSquareSize);
+
+                        // Redraw range circles if gun placed and artillery selected
+                        if (GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+                        {
+                            DrawRangeCircleIfApplicable();
+                        }
+
+                        // Redraw gun to target line if both are placed
+                        if (isTargetPlaced && GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+                        {
+                            DrawGunToTargetLine();
+                            DrawWindLine();
+                        }
                     }
                 }
 
@@ -312,6 +349,13 @@ namespace FoxArty
             // Add crosshair lines to the GridOverlay
             GridOverlay.Children.Add(horizontalLine);
             GridOverlay.Children.Add(verticalLine);
+
+            // Redraw gun to target line if both are placed
+            if (isTargetPlaced && GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot"))
+            {
+                DrawGunToTargetLine();
+                DrawWindLine();
+            }
         }
 
         private void PlaceMarker(Point position, Color color, string markerName)
@@ -368,7 +412,6 @@ namespace FoxArty
 
             GridOverlay.Children.Add(spreadCircle);
         }
-
 
         private void DrawRangeCircleIfApplicable()
         {
@@ -441,6 +484,77 @@ namespace FoxArty
             GridOverlay.Children.Add(rangeCircleMin);
         }
 
+        /// <summary>
+        /// Draws a line from the gun position to the target position.
+        /// </summary>
+        private void DrawGunToTargetLine()
+        {
+            // Ensure both gun and target are placed
+            if (!GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot") ||
+                !GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "TargetDot"))
+            {
+                return;
+            }
+
+            // Remove existing line if any
+            var existingLine = GridOverlay.Children.OfType<Line>().FirstOrDefault(l => l.Name == "GunToTargetLine");
+            if (existingLine != null)
+            {
+                GridOverlay.Children.Remove(existingLine);
+            }
+
+            // Create new line
+            Line gunToTargetLine = new Line
+            {
+                X1 = gunPosition.X,
+                Y1 = gunPosition.Y,
+                X2 = targetPosition.X,
+                Y2 = targetPosition.Y,
+                Stroke = new SolidColorBrush(Colors.Blue),
+                StrokeThickness = 2,
+                Name = "GunToTargetLine",
+                IsHitTestVisible = false
+            };
+
+            GridOverlay.Children.Add(gunToTargetLine);
+        }
+
+        /// <summary>
+        /// Draws a line representing the wind's influence from the target to the adjusted target position.
+        /// </summary>
+        private void DrawWindLine()
+        {
+            // Ensure both gun and target are placed
+            if (!GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot") ||
+                !GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "TargetDot"))
+            {
+                return;
+            }
+
+            // Remove existing wind line if any
+            var existingWindLine = GridOverlay.Children.OfType<Line>().FirstOrDefault(l => l.Name == "WindLine");
+            if (existingWindLine != null)
+            {
+                GridOverlay.Children.Remove(existingWindLine);
+            }
+
+            // Create new wind line
+            Line windLine = new Line
+            {
+                X1 = targetPosition.X,
+                Y1 = targetPosition.Y,
+                X2 = adjustedTargetPosition.X,
+                Y2 = adjustedTargetPosition.Y,
+                Stroke = new SolidColorBrush(Colors.Orange),
+                StrokeThickness = 2,
+                StrokeDashArray = new DoubleCollection() { 4, 2 }, // Dashed line for wind
+                Name = "WindLine",
+                IsHitTestVisible = false
+            };
+
+            GridOverlay.Children.Add(windLine);
+        }
+
         private void UpdateAzimuthAndDistance()
         {
             double gunGridX = gunPosition.X / largeSquareSize;
@@ -449,14 +563,17 @@ namespace FoxArty
             double targetGridY = targetPosition.Y / largeSquareSize;
 
             // Adjust target position based on wind
-            double windStrengthFactor = Wstr * 10; // Each wind level adds
+            double windStrengthFactor = Wstr * 10; // Each wind level adds 10 meters
             double windAngleRadians = Wdir * (Math.PI / 180); // Convert Wdir to radians
 
-            double windX = windStrengthFactor * Math.Cos(windAngleRadians);
-            double windY = windStrengthFactor * Math.Sin(windAngleRadians);
+            // **Inverted X-component to correct wind direction**
+            double windX = -Wstr * 10 * Math.Sin(windAngleRadians);
+            double windY = Wstr * 10 * Math.Cos(windAngleRadians);
 
             double adjustedTargetX = targetGridX + (windX / largeSquareSize); // Convert windX to grid units
             double adjustedTargetY = targetGridY + (windY / largeSquareSize); // Convert windY to grid units
+
+            adjustedTargetPosition = new Point(adjustedTargetX * largeSquareSize, adjustedTargetY * largeSquareSize);
 
             // Recalculate distance
             double dx = adjustedTargetX - gunGridX;
@@ -471,7 +588,7 @@ namespace FoxArty
             AzimuthDistance.Text = $"Azi: {azimuth:F2}° Distance: {distance:F2}m";
 
             // Draw the Spread Circle with a default spread radius of 20.8
-            DrawTargetSpreadCircle(new Point(targetGridX * largeSquareSize, targetGridY * largeSquareSize), 20.8);
+            DrawTargetSpreadCircle(new Point(targetGridX * largeSquareSize, targetGridY * largeSquareSize), 8.28);
         }
     }
 }

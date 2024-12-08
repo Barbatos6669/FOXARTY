@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|c:\\users\\larry\\documents\\github\\foxarty\\foxarty\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|solutionrelative:foxarty\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|c:\\users\\larry\\documents\\github\\foxarty\\foxarty\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|solutionrelative:foxarty\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\FoxArty\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "FoxArty\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\FoxArty\\MainWindow.xaml.cs",
+              "RelativeToolTip": "FoxArty\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-08T16:57:55.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\FoxArty\\MainWindow.xaml",
               "RelativeDocumentMoniker": "FoxArty\\MainWindow.xaml",
