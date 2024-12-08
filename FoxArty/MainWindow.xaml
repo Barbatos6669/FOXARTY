@@ -1,0 +1,116 @@
+﻿<Window x:Class="FoxArty.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hello World" Height="200" Width="930"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <!-- Overlay Canvas -->
+        <Canvas x:Name="GridOverlay"
+                Background="#01FFFFFF"
+                Visibility="Collapsed"
+                MouseLeftButtonDown="GridOverlay_MouseLeftButtonDown"/>
+
+        <!-- StackPanel for Controls -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,30,0,0">
+
+            <!-- Scale Icon -->
+            <Button Width="25" Height="25" Click="Button_Click">
+                <Image Source="Assets/Icons/scale_icon.png" Width="20" Height="20"/>
+            </Button>
+
+            <!-- Gun Placement Button -->
+            <Button Width="25" Height="25" Click="Button_Click">
+                <Image Source="Assets/Icons/gun_icon.png" Width="20" Height="20"/>
+            </Button>
+
+            <!-- Targeting Icon -->
+            <Button Width="25" Height="25" Click="Button_Click">
+                <Image Source="Assets/Icons/target_icon.png" Width="20" Height="20"/>
+            </Button>
+
+            <!-- Artillery Type Dropdown -->
+            <ComboBox x:Name="ArtilleryType"
+                      Width="100"
+                      Height="25"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center">
+                <ComboBoxItem IsSelected="True">120-68 KORONIDES FIELD GUN</ComboBoxItem>
+                <ComboBoxItem>Mortar</ComboBoxItem>
+                <ComboBoxItem>50-500 THUNDERBOLT CANNON</ComboBoxItem>
+                <ComboBoxItem>T13 DEIONEUS ROCKET BATTERY</ComboBoxItem>
+            </ComboBox>
+
+            <!-- Azimuth and Distance Display -->
+            <TextBlock x:Name="AzimuthDistance"
+                       Width="350"
+                       Height="25"
+                       Text="Azi: 0° Distance: 0m"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White"
+                       TextAlignment="Center"/>
+
+            <!-- Scale Slider -->
+            <Slider x:Name="ScaleSlider"
+                    Width="200"
+                    Height="25"
+                    Minimum=".5"
+                    Maximum="2"
+                    Value="1"
+                    TickFrequency="0.01"
+                    IsSnapToTickEnabled="False"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="Visible"/>
+
+            <!-- Canvas for Blue Circle, Measuring Guides, Grid Lines, and Draggable Yellow Dot -->
+            <Canvas Width="100" Height="120">
+                <!-- Outer Blue Circle -->
+                <Ellipse x:Name="BlueCircle" Width="100" Height="100" Fill="Blue" Opacity="0.2" Stroke="Black" StrokeThickness="3"/>
+
+                <!-- Black Center Dot -->
+                <Ellipse Width="5" Height="5" Fill="Black" Canvas.Left="47.5" Canvas.Top="47.5"/>
+
+                <!-- Black Measuring Circles -->
+                <Ellipse Width="25" Height="25" Stroke="Black" StrokeThickness="1" Opacity="0.8" Canvas.Left="37.5" Canvas.Top="37.5"/>
+                <Ellipse Width="50" Height="50" Stroke="Black" StrokeThickness="1" Opacity="0.8" Canvas.Left="25" Canvas.Top="25"/>
+                <Ellipse Width="75" Height="75" Stroke="Black" StrokeThickness="1" Opacity="0.8" Canvas.Left="12.5" Canvas.Top="12.5"/>
+
+                <!-- X-Axis Line -->
+                <Line X1="0" Y1="50" X2="100" Y2="50" Stroke="Black" StrokeThickness="1" Opacity="0.8"/>
+
+                <!-- Y-Axis Line -->
+                <Line X1="50" Y1="0" X2="50" Y2="100" Stroke="Black" StrokeThickness="1" Opacity="0.8"/>
+
+                <!-- Inner Yellow Circle -->
+                <Ellipse x:Name="YellowDot" Width="10" Height="10" Fill="Yellow" Stroke="Black" StrokeThickness="1"
+                         MouseLeftButtonDown="YellowDot_MouseLeftButtonDown"
+                         MouseMove="YellowDot_MouseMove"
+                         MouseLeftButtonUp="YellowDot_MouseLeftButtonUp"/>
+
+                <!-- Text field for Wdir and Wstr -->
+                <TextBlock x:Name="WindCircleInfo"
+                           Width="118"
+                           Height="20"
+                           Text="Wdir: 0° Wstr: 0m/s"
+                           FontSize="12"
+                           HorizontalAlignment="Left"
+                           TextAlignment="Center"
+                           Foreground="White"
+                           Canvas.Left="-9"
+                           Canvas.Top="105" VerticalAlignment="Center"/>
+            </Canvas>
+
+        </StackPanel>
+    </Grid>
+</Window> 

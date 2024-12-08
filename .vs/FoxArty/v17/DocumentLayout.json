@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|c:\\users\\larry\\documents\\github\\foxarty\\foxarty\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{26C6059B-E3CC-428E-ABC6-20FE028E1919}|FoxArty\\FoxArty.csproj|solutionrelative:foxarty\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\FoxArty\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "FoxArty\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Larry\\Documents\\github\\FOXARTY\\FoxArty\\MainWindow.xaml",
+              "RelativeToolTip": "FoxArty\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-12-08T16:27:51.315Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

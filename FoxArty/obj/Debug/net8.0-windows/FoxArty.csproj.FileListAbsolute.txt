@@ -1,0 +1,40 @@
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\bin\Debug\net8.0-windows\FoxArty.exe
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\bin\Debug\net8.0-windows\FoxArty.deps.json
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\bin\Debug\net8.0-windows\FoxArty.runtimeconfig.json
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\bin\Debug\net8.0-windows\FoxArty.dll
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\bin\Debug\net8.0-windows\FoxArty.pdb
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty_MarkupCompile.cache
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.g.resources
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.AssemblyInfoInputs.cache
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.AssemblyInfo.cs
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.csproj.CoreCompileInputs.cache
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.sourcelink.json
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.dll
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\refint\FoxArty.dll
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.pdb
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\FoxArty.genruntimeconfig.cache
+C:\Users\Larry\OneDrive\Desktop\New folder\FoxArty\obj\Debug\net8.0-windows\ref\FoxArty.dll
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\bin\Debug\net8.0-windows\FoxArty.exe
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\bin\Debug\net8.0-windows\FoxArty.deps.json
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\bin\Debug\net8.0-windows\FoxArty.runtimeconfig.json
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\bin\Debug\net8.0-windows\FoxArty.dll
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\bin\Debug\net8.0-windows\FoxArty.pdb
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty_MarkupCompile.cache
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.g.resources
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.AssemblyInfoInputs.cache
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.AssemblyInfo.cs
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.csproj.CoreCompileInputs.cache
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.sourcelink.json
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.dll
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\refint\FoxArty.dll
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.pdb
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\FoxArty.genruntimeconfig.cache
+C:\Users\Larry\Documents\github\FOXARTY\FoxArty\obj\Debug\net8.0-windows\ref\FoxArty.dll
