@@ -1,4 +1,4 @@
-﻿using System.Linq; // For LINQ (OfType)
+﻿using System.Linq; // For LINQ (OfType) 
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +14,7 @@ namespace FoxArty
 
         private Point targetPosition = new Point(0, 0);
         private bool isPlacingTarget = false;
-        private bool isTargetPlaced = false; // To prevent placing multiple target
+        private bool isTargetPlaced = false; // To prevent placing multiple targets
 
         private bool isGridVisible = false;
         private double largeSquareSize = 125.0; // Size of one large square in meters
@@ -24,6 +24,11 @@ namespace FoxArty
         // For dragging the Yellow Dot
         private bool isDraggingYellowDot = false;
         private Point yellowDotInitialMousePosition;
+
+        // For dragging the Protractor
+        private bool isDraggingProtractor = false;
+        private Point protractorInitialMousePosition;
+        private Point protractorInitialTransform;
 
         // Wind direction and strength
         private int Wdir = 0; // Default wind direction
@@ -79,6 +84,8 @@ namespace FoxArty
                 PlaceMarker(clickPosition, Colors.Black, "GunDot");
                 isPlacingGun = false;
 
+                UpdateWindDirection();
+
                 DrawRangeCircleIfApplicable();
                 DrawGunToTargetLine(); // Draw line after placing gun
                 DrawWindLine(); // Draw wind line if target is already placed
@@ -88,7 +95,9 @@ namespace FoxArty
             {
                 targetPosition = clickPosition;
                 isTargetPlaced = true; // Mark the target as placed
+                
                 PlaceMarker(clickPosition, Colors.Red, "TargetDot");
+                UpdateWindDirection();
                 isPlacingTarget = false;
 
                 // Draw the spread circle centered on the target
@@ -160,7 +169,7 @@ namespace FoxArty
             }
         }
 
-        private void YellowDot_MouseLeftButtonUp(object sender, MouseEventArgs e)
+        private void YellowDot_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             isDraggingYellowDot = false;
             YellowDot.ReleaseMouseCapture();
@@ -249,6 +258,68 @@ namespace FoxArty
                 }
 
                 UpdateAzimuthAndDistance();
+            }
+        }
+
+        private void ProtractorButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProtractorImage.Visibility == Visibility.Collapsed)
+            {
+                ProtractorImage.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ProtractorImage.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ProtractorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            isDraggingProtractor = true;
+            ProtractorImage.CaptureMouse();
+            protractorInitialMousePosition = e.GetPosition(this);
+            protractorInitialTransform = new Point(ProtractorTransform.X, ProtractorTransform.Y);
+        }
+
+        private void ProtractorImage_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDraggingProtractor)
+            {
+                Point currentMousePosition = e.GetPosition(this);
+                double offsetX = currentMousePosition.X - protractorInitialMousePosition.X;
+                double offsetY = currentMousePosition.Y - protractorInitialMousePosition.Y;
+
+                double newX = protractorInitialTransform.X + offsetX;
+                double newY = protractorInitialTransform.Y + offsetY;
+
+                // Optional: Boundary checks to keep the protractor within the window
+                double windowWidth = this.ActualWidth;
+                double windowHeight = this.ActualHeight;
+
+                double protractorWidth = ProtractorImage.ActualWidth;
+                double protractorHeight = ProtractorImage.ActualHeight;
+
+                if (newX < 0)
+                    newX = 0;
+                else if (newX + protractorWidth > windowWidth)
+                    newX = windowWidth - protractorWidth;
+
+                if (newY < 0)
+                    newY = 0;
+                else if (newY + protractorHeight > windowHeight)
+                    newY = windowHeight - protractorHeight;
+
+                ProtractorTransform.X = newX;
+                ProtractorTransform.Y = newY;
+            }
+        }
+
+        private void ProtractorImage_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingProtractor)
+            {
+                isDraggingProtractor = false;
+                ProtractorImage.ReleaseMouseCapture();
             }
         }
 
@@ -510,7 +581,9 @@ namespace FoxArty
                 Y1 = gunPosition.Y,
                 X2 = targetPosition.X,
                 Y2 = targetPosition.Y,
-                Stroke = new SolidColorBrush(Colors.Blue),
+                Stroke = new SolidColorBrush(Colors.Purple),
+                // slashed line
+                StrokeDashArray = new DoubleCollection() { 4, 2 },
                 StrokeThickness = 2,
                 Name = "GunToTargetLine",
                 IsHitTestVisible = false
@@ -521,6 +594,7 @@ namespace FoxArty
 
         /// <summary>
         /// Draws a line representing the wind's influence from the target to the adjusted target position.
+        /// Also draws a line from the adjusted target position to the gun position.
         /// </summary>
         private void DrawWindLine()
         {
@@ -553,6 +627,44 @@ namespace FoxArty
             };
 
             GridOverlay.Children.Add(windLine);
+
+            // Draw the new line from adjusted target position to gun
+            DrawWindToGunLine();
+        }
+
+        /// <summary>
+        /// Draws a line from the adjusted target position (tip of the wind line) to the gun position.
+        /// </summary>
+        private void DrawWindToGunLine()
+        {
+            // Ensure both gun and adjusted target positions are valid
+            if (!GridOverlay.Children.OfType<Ellipse>().Any(el => el.Name == "GunDot") ||
+                !isTargetPlaced)
+            {
+                return;
+            }
+
+            // Remove existing wind to gun line if it exists
+            var existingWindToGunLine = GridOverlay.Children.OfType<Line>().FirstOrDefault(l => l.Name == "WindToGunLine");
+            if (existingWindToGunLine != null)
+            {
+                GridOverlay.Children.Remove(existingWindToGunLine);
+            }
+
+            // Create the new wind to gun line
+            Line windToGunLine = new Line
+            {
+                X1 = adjustedTargetPosition.X,
+                Y1 = adjustedTargetPosition.Y,
+                X2 = gunPosition.X,
+                Y2 = gunPosition.Y,
+                Stroke = new SolidColorBrush(Colors.Black), // Choose a distinct color
+                StrokeThickness = 2,
+                Name = "WindToGunLine",
+                IsHitTestVisible = false
+            };
+
+            GridOverlay.Children.Add(windToGunLine);
         }
 
         private void UpdateAzimuthAndDistance()
@@ -563,7 +675,7 @@ namespace FoxArty
             double targetGridY = targetPosition.Y / largeSquareSize;
 
             // Adjust target position based on wind
-            double windStrengthFactor = Wstr * 10; // Each wind level adds 10 meters
+            double windStrengthFactor = Wstr * 25; // Each wind level adds 10 meters
             double windAngleRadians = Wdir * (Math.PI / 180); // Convert Wdir to radians
 
             // **Inverted X-component to correct wind direction**
@@ -587,7 +699,7 @@ namespace FoxArty
 
             AzimuthDistance.Text = $"Azi: {azimuth:F2}° Distance: {distance:F2}m";
 
-            // Draw the Spread Circle with a default spread radius of 20.8
+            // Draw the Spread Circle with a default spread radius of 8.28 meters
             DrawTargetSpreadCircle(new Point(targetGridX * largeSquareSize, targetGridY * largeSquareSize), 8.28);
         }
     }

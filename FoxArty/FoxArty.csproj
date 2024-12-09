@@ -10,14 +10,22 @@
 
   <ItemGroup>
     <None Remove="Assets\Icons\gun_icon.png" />
+    <None Remove="Assets\Icons\protractor_icon.png" />
     <None Remove="Assets\Icons\scale_icon.png" />
     <None Remove="Assets\Icons\target_icon.png" />
+    <None Remove="Assets\Tools\circle-41073_1280.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Assets\Icons\gun_icon.png" />
+    <Resource Include="Assets\Icons\protractor_icon.png" />
     <Resource Include="Assets\Icons\scale_icon.png" />
     <Resource Include="Assets\Icons\target_icon.png" />
+    <Resource Include="Assets\Icons\circle-41073_1280.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Tools\" />
   </ItemGroup>
 
 </Project>

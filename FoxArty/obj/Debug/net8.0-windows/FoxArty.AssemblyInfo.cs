@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FoxArty")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3808c83f2d489233809ab11c87678f62f7e608c0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+914dca4921bef63fcc74c2d6f19f282323a4f926")]
 [assembly: System.Reflection.AssemblyProductAttribute("FoxArty")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FoxArty")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
